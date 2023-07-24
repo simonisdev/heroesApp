@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HeroesService } from '../../services/heroes.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-page',
@@ -9,7 +10,7 @@ import { HeroesService } from '../../services/heroes.service';
   styles: [
   ]
 })
-export class NewPageComponent {
+export class NewPageComponent implements OnInit {
 
   public heroForm = new FormGroup({
     id:         new FormControl<string>(''),
@@ -26,12 +27,21 @@ export class NewPageComponent {
     { id: 'Marvel Comics', desc: 'Marvel - Comics' },
   ];
 
-  constructor( private heroesService: HeroesService  ) {}
+  constructor(
+    private heroesService: HeroesService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   get currentHero(): Hero {
     const hero = this.heroForm.value as Hero;
     return hero;
   }
+
+  ngOnInit(): void {
+
+  }
+
 
 
   onSubmit():void {
