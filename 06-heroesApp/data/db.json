@@ -13,7 +13,8 @@
       "publisher": "DC Comics",
       "alter_ego": "Kal-El",
       "first_appearance": "Action Comics #1",
-      "characters": "Kal-El"
+      "characters": "Kal-El",
+      "alt_img": "https://static01.nyt.com/images/2018/04/18/arts/18superman-oak-refer/18superman-oak10-superJumbo.jpg"
     },
     {
       "id": "dc-flash",
@@ -164,7 +165,7 @@
       "superhero": "Rafael",
       "publisher": "Marvel Comics",
       "alter_ego": "Rafa",
-      "first_appearance": "1984 - Tortuga ninja (Mirage Studios)",
+      "first_appearance": "1984 - Teenage Mutant Ninja Turtles (Mirage Studios)",
       "characters": "Tortugas ninja",
       "alt_img": "https://pm1.narvii.com/6267/934e05cacd0bdac1b914dd3e2e43eba964cd6ff8_00.jpg"
     },
