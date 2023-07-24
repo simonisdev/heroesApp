@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { Hero, Publisher } from '../../interfaces/hero.interface';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
+
+import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
@@ -9,7 +12,7 @@ import { HeroesService } from '../../services/heroes.service';
   styles: [
   ]
 })
-export class NewPageComponent {
+export class NewPageComponent implements OnInit {
 
   public heroForm = new FormGroup({
     id:         new FormControl<string>(''),
@@ -26,11 +29,35 @@ export class NewPageComponent {
     { id: 'Marvel Comics', desc: 'Marvel - Comics' },
   ];
 
-  constructor( private heroesService: HeroesService  ) {}
+  constructor(
+    private heroesService: HeroesService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+    ) {}
 
   get currentHero(): Hero {
     const hero = this.heroForm.value as Hero;
     return hero;
+  }
+
+  ngOnInit(): void {
+
+    if ( !this.router.url.includes('edit') ) return;
+
+    this.activatedRoute.params
+      .pipe(
+        switchMap( ({ id }) => this.heroesService.getHeroById( id ) ),
+      ).subscribe( hero => {
+
+        if ( !hero ) {
+          return this.router.navigateByUrl('/');
+        }
+
+        this.heroForm.reset( hero );
+        return;
+      });
+
+
   }
 
 
